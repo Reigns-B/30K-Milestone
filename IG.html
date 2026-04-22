@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@mrbradley__ — 30K Followers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #C9A84C;
+            --gold-light: #E8D5A3;
+            --gold-dark: #9A7B2E;
+            --black: #1a1a1a;
+            --charcoal: #2d2d2d;
+            --gray: #6b6b6b;
+            --light-gray: #f5f5f5;
+            --border: #e8e8e8;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: var(--black);
+        }
+
+        /* Subtle premium texture overlay */
+        .texture-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(201, 168, 76, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(201, 168, 76, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Confetti Canvas */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Main Container */
+        .main-container {
+            position: relative;
+            z-index: 10;
+            max-width: 520px;
+            margin: 0 auto;
+            padding: 50px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Top elegant line */
+        .top-accent {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            margin-bottom: 30px;
+            border-radius: 2px;
+            animation: expandLine 1s ease 0.2s both;
+        }
+
+        @keyframes expandLine {
+            from { width: 0; opacity: 0; }
+            to { width: 60px; opacity: 1; }
+        }
+
+        /* Premium Badge */
+        .premium-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            border: 1px solid var(--gold);
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            margin-bottom: 35px;
+            background: rgba(201, 168, 76, 0.05);
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .premium-badge .diamond {
+            font-size: 0.7rem;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            text-align: center;
+            width: 100%;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Profile Picture */
+        .profile-pic-wrapper {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 22px;
+        }
+
+        .profile-ring {
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+            padding: 3px;
+            animation: ringShimmer 4s ease-in-out infinite;
+        }
+
+        @keyframes ringShimmer {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+        }
+
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            border: 3px solid var(--white);
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        /* Verified Badge */
+        .verified-badge {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 32px;
+            height: 32px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: white;
+            border: 3px solid var(--white);
+            z-index: 3;
+            box-shadow: 0 2px 8px rgba(201, 168, 76, 0.4);
+        }
+
+        /* Username */
+        .username {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--black);
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+        }
+
+        .display-name {
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-weight: 500;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 25px;
+            padding: 0 20px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--black);
+            display: block;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        /* Divider */
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: var(--border);
+            margin: 0 auto 20px;
+        }
+
+        /* Bio */
+        .bio {
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.85rem;
+            line-height: 1.7;
+            margin-bottom: 6px;
+            max-width: 380px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .bio-link {
+            color: var(--gold-dark);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .bio-link:hover {
+            border-bottom-color: var(--gold);
+        }
+
+        .website-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--gold-dark);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 8px;
+            padding: 6px 16px;
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+        .website-link:hover {
+            border-color: var(--gold);
+            background: rgba(201, 168, 76, 0.05);
+        }
+
+        /* ===== MILESTONE CARD ===== */
+        .milestone-card {
+            width: 100%;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin: 35px 0 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 2px 40px rgba(0,0,0,0.04),
+                0 0 0 1px rgba(201, 168, 76, 0.08);
+            animation: cardReveal 1.2s ease 0.8s both;
+        }
+
+        @keyframes cardReveal {
+            from { opacity: 0; transform: translateY(40px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Corner accents */
+        .milestone-card::before,
+        .milestone-card::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-color: var(--gold);
+            border-style: solid;
+            opacity: 0.3;
+        }
+
+        .milestone-card::before {
+            top: 15px;
+            left: 15px;
+            border-width: 2px 0 0 2px;
+        }
+
+        .milestone-card::after {
+            bottom: 15px;
+            right: 15px;
+            border-width: 0 2px 2px 0;
+        }
+
+        .milestone-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--gray);
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .milestone-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 5.5rem;
+            font-weight: 900;
+            color: var(--black);
+            line-height: 1;
+            margin: 5px 0;
+            letter-spacing: -3px;
+            animation: numberPop 1s cubic-bezier(0.34, 1.56, 0.64, 1) 1.2s both;
+        }
+
+        .milestone-number .k {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--gold);
+            vertical-align: super;
+            margin-left: 2px;
+        }
+
+        @keyframes numberPop {
+            from { opacity: 0; transform: scale(0.5) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .milestone-followers {
+            font-size: 0.85rem;
+            color: var(--gray);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .milestone-line {
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 0 auto 20px;
+        }
+
+        .milestone-msg {
+            font-size: 0.9rem;
+            color: var(--gray);
+            line-height: 1.7;
+            max-width: 320px;
+            margin: 0 auto;
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .milestone-msg strong {
+            color: var(--black);
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        /* Thank You Section */
+        .thank-you {
+            text-align: center;
+            margin: 10px 0 25px;
+            animation: fadeInUp 1s ease 1.4s both;
+        }
+
+        .thank-you h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .thank-you p {
+            color: var(--gray);
+            font-size: 0.85rem;
+            line-height: 1.7;
+            max-width: 350px;
+            margin: 0 auto;
+        }
+
+        /* Celebration Buttons */
+        .celebration-btns {
+            display: flex;
+            gap: 12px;
+            width: 100%;
+            margin: 10px 0;
+            animation: fadeInUp 1s ease 1.6s both;
+        }
+
+        .celebrate-btn {
+            flex: 1;
+            padding: 16px 20px;
+            border: none;
+            border-radius: 14px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+        }
+
+        .celebrate-btn.clap-btn {
+            background: var(--black);
+            color: var(--white);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .celebrate-btn.clap-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            background: var(--charcoal);
+        }
+
+        .celebrate-btn.share-btn {
+            background: var(--white);
+            color: var(--black);
+            border: 1px solid var(--border);
+        }
+
+        .celebrate-btn.share-btn:hover {
+            transform: translateY(-3px);
+            border-color: var(--gold);
+            box-shadow: 0 4px 20px rgba(201, 168, 76, 0.1);
+        }
+
+        .celebrate-btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .clap-count {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 12px;
+            letter-spacing: 1px;
+            animation: fadeInUp 1s ease 1.7s both;
+        }
+
+        /* ===== MILESTONES TIMELINE ===== */
+        .timeline-section {
+            width: 100%;
+            margin-top: 35px;
+            padding: 25px;
+            background: var(--light-gray);
+            border-radius: 16px;
+            animation: fadeInUp 1s ease 1.8s both;
+        }
+
+        .timeline-title {
+            text-align: center;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .timeline-track {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--border);
+            border-radius: 1px;
+        }
+
+        .timeline-progress {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            border-radius: 1px;
+            width: 66%;
+            animation: progressGrow 1.5s ease 2s both;
+        }
+
+        @keyframes progressGrow {
+            from { width: 0; }
+            to { width: 66%; }
+        }
+
+        .timeline-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .timeline-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--border);
+            border: 2px solid var(--white);
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item.achieved .timeline-dot {
+            background: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.2);
+        }
+
+        .timeline-item.current .timeline-dot {
+            width: 16px;
+            height: 16px;
+            background: var(--black);
+            border: 3px solid var(--gold);
+            box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.15);
+            animation: pulse 2s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.15); }
+            50% { box-shadow: 0 0 0 8px rgba(201, 168, 76, 0.08); }
+        }
+
+        .timeline-label {
+            font-size: 0.65rem;
+            color: #aaa;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .timeline-item.achieved .timeline-label {
+            color: var(--gray);
+        }
+
+        .timeline-item.current .timeline-label {
+            color: var(--black);
+            font-weight: 700;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            animation: fadeInUp 1s ease 2s both;
+        }
+
+        .footer-line {
+            width: 30px;
+            height: 1px;
+            background: var(--border);
+            margin: 0 auto 15px;
+        }
+
+        .footer p {
+            color: #bbb;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .footer .brand {
+            color: var(--gray);
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        /* Floating elements */
+        .floating-emoji {
+            position: fixed;
+            font-size: 1.8rem;
+            pointer-events: none;
+            animation: floatUp 2s ease-out forwards;
+            z-index: 999;
+        }
+
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+            100% { opacity: 0; transform: translateY(-180px) scale(1.3) rotate(15deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .main-container { padding: 35px 18px; }
+            .milestone-number { font-size: 4rem; }
+            .milestone-number .k { font-size: 2.2rem; }
+            .username { font-size: 1.3rem; }
+            .thank-you h2 { font-size: 1.5rem; }
+            .stats-row { gap: 28px; }
+            .timeline-label { font-size: 0.55rem; }
+            .celebration-btns { gap: 10px; }
+            .celebrate-btn { padding: 14px 16px; font-size: 0.85rem; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="texture-overlay"></div>
+    <canvas id="confetti-canvas"></canvas>
+
+    <div class="main-container">
+        <!-- Top Accent Line -->
+        <div class="top-accent"></div>
+
+        <!-- Premium Badge -->
+        <div class="premium-badge">
+            <span class="diamond">◆</span>
+            <span>Milestone Reached</span>
+            <span class="diamond">◆</span>
+        </div>
+
+        <!-- Profile Section -->
+        <div class="profile-section">
+            <div class="profile-pic-wrapper">
+                <div class="profile-ring">
+                    <div class="profile-pic">👤</div>
+                </div>
+                <div class="verified-badge">✓</div>
+            </div>
+
+            <div class="username">mrbradley__</div>
+            <div class="display-name">BRADLEY TECH 🌐👨‍💻</div>
+
+            <div class="stats-row">
+                <div class="stat">
+                    <span class="stat-number">55</span>
+                    <span class="stat-label">Posts</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" style="color: var(--gold-dark);">30K</span>
+                    <span class="stat-label">Followers</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">1,055</span>
+                    <span class="stat-label">Following</span>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="bio">
+                Digital creator<br>
+                I Create, Strategize, Optimize, Build and Elevate YOUR brands Digital Success all in one<br>
+                👉 SWE | Web Dev | Marketing | Social Media | UGC<br>
+                CEO <a href="#" class="bio-link">@bradleydigitals</a>
+            </div>
+            <a href="https://bradleydigitals.com" class="website-link" target="_blank">
+                🔗 bradleydigitals.com
+            </a>
+        </div>
+
+        <!-- Milestone Card -->
+        <div class="milestone-card">
+            <div class="milestone-label">Instagram Milestone</div>
+            <div class="milestone-number">30<span class="k">K</span></div>
+            <div class="milestone-followers">Followers</div>
+            <div class="milestone-line"></div>
+            <div class="milestone-msg">
+                Thank you for <strong>30,000</strong> amazing followers.<br>
+                Every step of this journey has been incredible.
+            </div>
+        </div>
+
+        <!-- Thank You -->
+        <div class="thank-you">
+            <h2>Thank You</h2>
+            <p>Every follow, every like, every comment — it all means the world. Here's to the next chapter together.</p>
+        </div>
+
+        <!-- Celebration Buttons -->
+        <div class="celebration-btns">
+            <button class="celebrate-btn clap-btn" onclick="celebrate()">
+                👏 Celebrate
+            </button>
+            <button class="celebrate-btn share-btn" onclick="shareMilestone()">
+                📤 Share
+            </button>
+        </div>
+        <div class="clap-count" id="clap-count">0 celebrations</div>
+
+        <!-- Milestones Timeline -->
+        <div class="timeline-section">
+            <div class="timeline-title">Growth Journey</div>
+            <div class="timeline">
+                <div class="timeline-track"></div>
+                <div class="timeline-progress"></div>
+
+                <div class="timeline-item achieved">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-label">1K</div>
+                </div>
+                <div class="timeline-item achieved">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-label">5K</div>
+                </div>
+                <div class="timeline-item achieved">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-label">10K</div>
+                </div>
+                <div class="timeline-item achieved">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-label">20K</div>
+                </div>
+                <div class="timeline-item current">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-label">30K</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-label">50K</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-label">100K</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-line"></div>
+            <p>Made with intention for</p>
+            <p class="brand">@mrbradley__ — Bradley Digitals</p>
+        </div>
+    </div>
+
+    <script>
+        // Confetti System — Gold & White Premium Palette
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        let confetti = [];
+        let animationId = null;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class ConfettiPiece {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = -20;
+                this.size = Math.random() * 6 + 3;
+                this.speedY = Math.random() * 2.5 + 1.5;
+                this.speedX = Math.random() * 3 - 1.5;
+                this.rotation = Math.random() * 360;
+                this.rotationSpeed = Math.random() * 8 - 4;
+                this.color = [
+                    '#C9A84C', '#E8D5A3', '#1a1a1a', '#2d2d2d',
+                    '#D4AF37', '#F5E6C8', '#333333', '#C0A060',
+                    '#E8DCC8', '#B8954F', '#444444', '#D9C9A0'
+                ][Math.floor(Math.random() * 12)];
+                this.opacity = 1;
+                this.shape = Math.random() > 0.6 ? 'circle' : 'rect';
+            }
+
+            update() {
+                this.y += this.speedY;
+                this.x += Math.sin(this.y * 0.008) * 1.5 + this.speedX;
+                this.rotation += this.rotationSpeed;
+                this.opacity -= 0.0025;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation * Math.PI / 180);
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+
+                if (this.shape === 'circle') {
+                    ctx.beginPath();
+                    ctx.arc(0, 0, this.size / 2, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
+                }
+
+                ctx.restore();
+            }
+        }
+
+        function startConfetti(count = 180, duration = 6000) {
+            // Burst from center
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const piece = new ConfettiPiece();
+                    piece.x = canvas.width / 2 + (Math.random() - 0.5) * 300;
+                    piece.y = canvas.height / 2;
+                    piece.speedY = (Math.random() - 0.5) * 12;
+                    piece.speedX = (Math.random() - 0.5) * 12;
+                    confetti.push(piece);
+                }, i * 6);
+            }
+
+            const rainInterval = setInterval(() => {
+                for (let i = 0; i < 4; i++) confetti.push(new ConfettiPiece());
+            }, 120);
+
+            setTimeout(() => clearInterval(rainInterval), duration);
+
+            if (animationId) cancelAnimationFrame(animationId);
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                confetti = confetti.filter(p => p.opacity > 0 && p.y < canvas.height + 50);
+                confetti.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+
+                if (confetti.length > 0) {
+                    animationId = requestAnimationFrame(animate);
+                }
+            }
+            animate();
+        }
+
+        // Celebration
+        let clapCount = 0;
+
+        function celebrate() {
+            clapCount++;
+            document.getElementById('clap-count').textContent = clapCount + ' celebration' + (clapCount !== 1 ? 's' : '');
+
+            startConfetti(80, 4000);
+
+            const emojis = ['👏', '🎉', '✨', '💫', '🥂', '🙌', '🔥', '💎'];
+            for (let i = 0; i < 6; i++) {
+                setTimeout(() => {
+                    const el = document.createElement('div');
+                    el.className = 'floating-emoji';
+                    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    el.style.left = (Math.random() * window.innerWidth) + 'px';
+                    el.style.top = (window.innerHeight - 120) + 'px';
+                    document.body.appendChild(el);
+                    setTimeout(() => el.remove(), 2000);
+                }, i * 180);
+            }
+
+            if (navigator.vibrate) navigator.vibrate([40, 40, 40]);
+        }
+
+        function shareMilestone() {
+            const text = `🎉 Just hit 30K followers on Instagram!
+
+Thank you to every single person who believed in the journey. Here's to building bigger together.
+
+Follow along: @mrbradley__
+🔗 bradleydigitals.com
+
+#30K #Milestone #BradleyTech #DigitalCreator`;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: '30K Followers Milestone',
+                    text: text
+                });
+            } else {
+                navigator.clipboard.writeText(text).then(() => {
+                    // Subtle toast
+                    const toast = document.createElement('div');
+                    toast.style.cssText = 'position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:var(--black);color:white;padding:12px 24px;border-radius:50px;font-size:0.85rem;font-weight:500;z-index:9999;animation:fadeInUp 0.3s ease;';
+                    toast.textContent = 'Copied to clipboard 📋';
+                    document.body.appendChild(toast);
+                    setTimeout(() => toast.remove(), 2500);
+                });
+            }
+        }
+
+        // Auto-start on load
+        window.addEventListener('load', () => {
+            setTimeout(() => startConfetti(120, 7000), 1000);
+            setTimeout(() => {
+                for (let i = 0; i < 4; i++) {
+                    setTimeout(() => {
+                        const el = document.createElement('div');
+                        el.className = 'floating-emoji';
+                        el.textContent = ['👏', '✨', '🎉', '💫'][i];
+                        el.style.left = (window.innerWidth / 2 + (Math.random() - 0.5) * 250) + 'px';
+                        el.style.top = (window.innerHeight / 2 + 50) + 'px';
+                        document.body.appendChild(el);
+                        setTimeout(() => el.remove(), 2000);
+                    }, i * 250);
+                }
+            }, 1800);
+        });
+    </script>
+</body>
+</html>
